@@ -4,6 +4,6 @@ public class Program
 {
     public static Task Main(string[] args)
     {
-        WebApplicationServer.BuildWebApplicationServer(args).Run();
+        return WebApplicationServer.BuildWebApplicationServer(args).RunAsync();
     }
 }
