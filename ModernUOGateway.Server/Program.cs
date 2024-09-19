@@ -1,9 +1,6 @@
 namespace ModernUOGateway.Server;
 
-public class Program
+public static class Program
 {
-    public static Task Main(string[] args)
-    {
-        return WebApplicationServer.BuildWebApplicationServer(args).RunAsync();
-    }
+    public static Task Main(string[] args) => WebApplicationServer.BuildWebApplicationServer(args).RunAsync();
 }

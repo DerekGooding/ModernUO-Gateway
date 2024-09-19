@@ -10,8 +10,5 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
         base(options)
     { }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlite("Data Source=AppDb.db;");
-    }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlite("Data Source=AppDb.db;");
 }

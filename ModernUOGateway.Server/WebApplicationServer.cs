@@ -3,7 +3,7 @@ using ModernUOGateway.Server.Database;
 
 namespace ModernUOGateway.Server;
 
-public class WebApplicationServer
+public static class WebApplicationServer
 {
     public static WebApplication BuildWebApplicationServer(string[] args)
     {
@@ -47,7 +47,7 @@ public class WebApplicationServer
 
         app.MapGet("/weatherforecast", (HttpContext httpContext) =>
             {
-                var forecast = Enumerable.Range(1, 5).Select(index =>
+                return Enumerable.Range(1, 5).Select(index =>
                         new WeatherForecast
                         {
                             Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -55,7 +55,6 @@ public class WebApplicationServer
                             Summary = summaries[Random.Shared.Next(summaries.Length)]
                         })
                     .ToArray();
-                return forecast;
             })
             .WithName("GetWeatherForecast")
             .WithOpenApi();

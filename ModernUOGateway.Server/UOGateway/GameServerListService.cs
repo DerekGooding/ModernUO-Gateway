@@ -24,10 +24,7 @@ public class GameServerListService
         _gameServerListings.Add(gameServerListing);
     }
 
-    public bool UnregisterGameServer(Guid id)
-    {
-        return _gameServerListingById.Remove(id, out var gameServerListing) && _gameServerListings.Remove(gameServerListing);
-    }
+    public bool UnregisterGameServer(Guid id) => _gameServerListingById.Remove(id, out var gameServerListing) && _gameServerListings.Remove(gameServerListing);
 
     public IEnumerable<GameServerListing> GetGameServerListings() => _gameServerListingById.Values;
 }
