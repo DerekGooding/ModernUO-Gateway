@@ -4,14 +4,14 @@ public class GameServerListService
 {
     private readonly Dictionary<Guid, GameServerListing> _gameServerListingById = new();
     private readonly SortedSet<GameServerListing> _gameServerListings = new(new RefreshComparer());
-    
+
     // Todo: Use DTO instead of record
     public void RegisterGameServer(GameServerListing gameServerListing)
     {
         _gameServerListings.Add(gameServerListing);
         _gameServerListingById[gameServerListing.Id] = gameServerListing;
     }
-    
+
     public void RefreshGameServer(Guid id)
     {
         if (!_gameServerListingById.TryGetValue(id, out var gameServerListing))
@@ -23,12 +23,12 @@ public class GameServerListService
         _gameServerListings.Remove(gameServerListing);
         _gameServerListings.Add(gameServerListing);
     }
-    
+
     public bool UnregisterGameServer(Guid id)
     {
         return _gameServerListingById.Remove(id, out var gameServerListing) && _gameServerListings.Remove(gameServerListing);
     }
-    
+
     public IEnumerable<GameServerListing> GetGameServerListings() => _gameServerListingById.Values;
 }
 

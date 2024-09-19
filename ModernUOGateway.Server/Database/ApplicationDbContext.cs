@@ -7,7 +7,8 @@ namespace ModernUOGateway.Server.Database;
 public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
-        base(options) { }
+        base(options)
+    { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

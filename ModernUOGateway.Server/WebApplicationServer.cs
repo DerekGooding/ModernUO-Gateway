@@ -8,13 +8,13 @@ public class WebApplicationServer
     public static WebApplication BuildWebApplicationServer(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-            
+
         // Database
         builder.Services.AddDbContext<ApplicationDbContext>();
-            
+
         // Add services to the container.
         builder.Services.AddAuthorization();
-            
+
         // Identity endpoints
         builder.Services.AddIdentityApiEndpoints<IdentityUser>()
             .AddEntityFrameworkStores<ApplicationDbContext>();

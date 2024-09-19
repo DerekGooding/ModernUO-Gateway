@@ -7,24 +7,24 @@ public class UOGatewayServer : IHostedService
 {
     private readonly IHostApplicationLifetime _hostApplicationLifetime;
     private readonly HashSet<TcpClient> _tcpClients = new();
-    
+
     public UOGatewayServer(IHostApplicationLifetime hostApplicationLifetime)
     {
         _hostApplicationLifetime = hostApplicationLifetime;
     }
-    
+
     public Task StartAsync(CancellationToken cancellationToken)
     {
         _ = Task.Run(RunServer, cancellationToken);
         return Task.CompletedTask;
     }
-    
+
     private async Task RunServer()
     {
         var stoppingToken = _hostApplicationLifetime.ApplicationStopping;
         var tcpListener = new TcpListener(IPAddress.Any, 2593);
         tcpListener.Start();
-        
+
         while (!stoppingToken.IsCancellationRequested)
         {
             var client = await tcpListener.AcceptTcpClientAsync(stoppingToken);
@@ -33,7 +33,7 @@ public class UOGatewayServer : IHostedService
             {
                 break;
             }
-            
+
             _tcpClients.Add(client);
             _ = Task.Run(() => HandleClientAsync(client, stoppingToken), stoppingToken);
         }
@@ -58,7 +58,7 @@ public class UOGatewayServer : IHostedService
         {
             return;
         }
-        
+
         // Implement your logic to handle the TCP client
         // You can use _myService here as needed
     }
